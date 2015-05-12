@@ -1,6 +1,7 @@
 // @import '../node_modules/normalize-css/normalize.css'
 
 @primary-color: green;
+@container-max-width: 1050px;
 
 h1 {
   color: @primary-color;
@@ -12,4 +13,12 @@ li.task {
   label {
     padding: 0 10px;
   }
+}
+
+.container {
+	z-index: 200;
+	position: relative;
+	max-width: @container-max-width;
+	margin: 0 auto;
+	transition: transform 0.5s;
 }

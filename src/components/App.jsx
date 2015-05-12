@@ -2,12 +2,17 @@ const React = require('react');
 const TodoStore = require('../flux/stores/TodoStore');
 const ActionCreator = require('../flux/actions/TodoActionCreators');
 const TaskList = require('./TaskList.jsx');
+const DisplayItem = require('./DisplayItem/DisplayItem.jsx');
 
 let App = React.createClass({
 
   getInitialState() {
     return {
-      tasks: []
+      tasks: [],
+      items: [
+        "swag",
+        "swish"
+      ]
     }
   },
 
@@ -35,11 +40,19 @@ let App = React.createClass({
   },
 
   render() {
-    let {tasks} = this.state;
+    let tasks = this.state.tasks;
+    let items = this.state.items;
+
     return (
       <div>
-        <h1>Learn Flux</h1>
+        <h1>mt-transition example</h1>
 
+        <div className="container">
+          {items.map(item =>
+            <DisplayItem />
+          )}
+        </div>
+        
         <TaskList tasks={tasks} />
 
         <button onClick={this.handleAddNewClick}>Add New</button>

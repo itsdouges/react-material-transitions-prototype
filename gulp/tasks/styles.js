@@ -4,7 +4,7 @@ var connect = require('gulp-connect');
 var config = require('../config.js').app;
 
 var lessConfig = {
-    src: config.src + '/**/*.less',
+    src: config.src + '/index.less',
     dest: config.dest + '/styles',
   };
 
