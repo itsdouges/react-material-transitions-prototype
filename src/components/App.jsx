@@ -1,6 +1,6 @@
 const React = require('react');
-const TodoStore = require('../stores/TodoStore');
-const ActionCreator = require('../actions/TodoActionCreators');
+const TodoStore = require('../flux/stores/TodoStore');
+const ActionCreator = require('../flux/actions/TodoActionCreators');
 const TaskList = require('./TaskList.jsx');
 
 let App = React.createClass({

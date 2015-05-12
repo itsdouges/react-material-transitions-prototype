@@ -1,0 +1,38 @@
+// DisplayItem.less
+
+@import '../../mixins/Zindex.less';
+
+@container-max-width: 1050px;
+
+.mt-display-item {
+	z-index: @content-display-z;
+	display: inline-block;
+	background-color: orange;
+	margin: 0;
+	overflow: hidden;
+
+	// types of content displays, currently only single+double are implemented
+	&.single {
+		height: 20em;
+		width: 20em;
+	}
+
+	&.double {
+		height: 20em;
+		width: 40em;
+	}
+}
+
+.mt-container {
+	z-index: @content-z;
+	position: relative;
+	max-width: @container-max-width;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	// width: 100%;
+	transition: transform 0.5s;
+
+	// move to another class.
+	// margin: 0 auto;
+}

@@ -1,5 +1,5 @@
 const React = require('react');
-const ActionCreator = require('../actions/TodoActionCreators');
+const ActionCreator = require('../flux/actions/TodoActionCreators');
 
 let Task = React.createClass({
   getDefaultProps() {

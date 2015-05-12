@@ -7,20 +7,25 @@ var watchify = require('watchify');
 var connect = require('gulp-connect');
 var config = require('../config').app;
 
-// TODO: Split this task up, add in minifying etc.
+// TODO: Split this task up. 
+// 1. Compile to separate js classes
+// 2. Minify
+// 3. Concatenate everything.
 
 var browserifyConfig = {
     settings: {
       transform: ['reactify', 'babelify']
     },
-    src: config.src + '/js/index.jsx',
+    src: config.src + '/index.jsx',
     dest: config.dest + '/js',
     outputName: 'index.js',
     debug: gutil.env.type === 'dev'
 }
 
 watchify.args.debug = browserifyConfig.debug;
+
 var bundler = watchify(browserify(browserifyConfig.src, watchify.args));
+
 browserifyConfig.settings.transform.forEach(function(t) {
   bundler.transform(t);
 });
