@@ -1,6 +1,29 @@
 var gulp = require('gulp');
-var config = require('../config').watch;
+var config = require('../config').app;
+var connect = require('gulp-connect');
+var watch = require('gulp-watch');
 
-gulp.task('watch', ['build'], function() {
-  gulp.watch(config.src, config.tasks);
+gulp.task('watch', ['watch:src', 'watch:dist']);
+
+// This task is responsible for watching the source folder.
+gulp.task('watch:src', function() {
+  gulp.watch([
+  	config.src + '/*.less',
+  	config.src + '/**/*.less'
+  	], ['styles']);
+
+  gulp.watch([
+  	config.src + '/**/*.jsx',
+  	config.src + '/**/*.html',
+  	], ['build']);
+});
+
+// This task is responsible for watching the dist folder.
+gulp.task('watch:dist', function() {
+  gulp.src(config.dest)
+    .pipe(watch([
+    		config.dest + '/*.*',
+        config.dest + '/**/*.*'
+    	]))
+    .pipe(connect.reload());
 });
