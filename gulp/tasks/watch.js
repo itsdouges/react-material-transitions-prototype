@@ -7,12 +7,14 @@ gulp.task('watch', ['watch:src', 'watch:dist']);
 
 // This task is responsible for watching the source folder.
 gulp.task('watch:src', function() {
-  gulp.watch([
+  gulp
+    .watch([
   	config.src + '/*.less',
   	config.src + '/**/*.less'
   	], ['styles']);
 
-  gulp.watch([
+  gulp
+    .watch([
   	config.src + '/**/*.jsx',
   	config.src + '/**/*.html',
   	], ['build']);
@@ -20,7 +22,8 @@ gulp.task('watch:src', function() {
 
 // This task is responsible for watching the dist folder.
 gulp.task('watch:dist', function() {
-  gulp.src(config.dest)
+  gulp
+    .src(config.dest)
     .pipe(watch([
     		config.dest + '/*.*',
         config.dest + '/**/*.*'

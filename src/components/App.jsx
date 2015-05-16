@@ -3,61 +3,47 @@ const TodoStore = require('../flux/stores/TodoStore');
 const ActionCreator = require('../flux/actions/TodoActionCreators');
 const TaskList = require('./TaskList.jsx');
 const DisplayItem = require('./DisplayItem/DisplayItem.jsx');
+const MaterialTransition = require('./MaterialTransition/MaterialTransition.jsx');
 
 let App = React.createClass({
 
   getInitialState() {
     return {
-      tasks: [],
       items: [
-        "swag",
-        "swish"
+        {
+          id: 0,
+          title: "In a Perfect World",
+          subtitle: "Kodaline",
+          images: {
+            bg: "./images/dimg.png",
+            display: "./images/bg.jpg"
+          },
+          options: {
+            display: "double"
+          }
+        },
+        {
+          id: 2,
+          title: "Pharrell Williams",
+          subtitle: "GIRL",
+          images: {
+            bg: "./images/dimg.png",
+            display: "./images/bg.jpg"
+          },
+          options: {
+            hideInfo: true
+          }
+        }
       ]
     }
   },
 
-  _onChange() {
-    this.setState(TodoStore.getAll());
-  },
-
-  componentDidMount() {
-    TodoStore.addChangeListener(this._onChange);
-  },
-
-  componentWillUnmount() {
-    TodoStore.removeChangeListener(this._onChange);
-  },
-
-  handleAddNewClick(e) {
-    let title = prompt('Enter task title:');
-    if (title) {
-      ActionCreator.addItem(title);
-    }
-  },
-
-  handleClearListClick(e) {
-    ActionCreator.clearList();
-  },
-
   render() {
-    let tasks = this.state.tasks;
     let items = this.state.items;
+    let options = this.state.options;
 
     return (
-      <div>
-        <h1>mt-transition example</h1>
-
-        <div className="container">
-          {items.map(item =>
-            <DisplayItem />
-          )}
-        </div>
-        
-        <TaskList tasks={tasks} />
-
-        <button onClick={this.handleAddNewClick}>Add New</button>
-        <button onClick={this.handleClearListClick}>Clear List</button>
-      </div>
+      <MaterialTransition items={items} options={options} />
     );
   }
 

@@ -7,6 +7,7 @@ var htmlConfig = {
 };
 
 gulp.task('html', function() {
-  return gulp.src(htmlConfig.src)
+  return gulp
+  	.src(htmlConfig.src)
     .pipe(gulp.dest(htmlConfig.dest));
 });
