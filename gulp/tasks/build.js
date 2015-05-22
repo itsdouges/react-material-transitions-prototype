@@ -1,7 +1,15 @@
 var gulp = require('gulp');
 var connect = require('gulp-connect');
 var config = require('../config').watch;
+var runSequence = require('run-sequence');
 
-// TODO: Tasks currently run out of order ? or something ? Clean isn't being run first. Find out why.
+// https://www.npmjs.com/package/run-sequence
+// run-sequence being used to correctly order tasks.
 
-gulp.task('build', ['clean:dist', 'browserify', 'styles', 'html', 'images']);
+gulp.task('build', function (callback) {
+	runSequence(
+		//'clean:dist', 
+		['javascript', 'styles', 'html', 'images'],
+		callback
+	);
+});

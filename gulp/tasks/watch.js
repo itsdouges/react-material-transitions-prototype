@@ -9,24 +9,25 @@ gulp.task('watch', ['watch:src', 'watch:dist']);
 gulp.task('watch:src', function() {
   gulp
     .watch([
-  	config.src + '/*.less',
-  	config.src + '/**/*.less'
-  	], ['styles']);
+      	config.src + '*.less',
+      	config.src + '**/*.less'
+      ], ['styles']
+    );
 
   gulp
     .watch([
-  	config.src + '/**/*.jsx',
-  	config.src + '/**/*.html',
-  	], ['build']);
+  	config.src + '**/*.js*',
+  	config.src + '**/*.html',
+  	], ['javascript']);
 });
 
 // This task is responsible for watching the dist folder.
 gulp.task('watch:dist', function() {
-  gulp
+  return gulp
     .src(config.dest)
     .pipe(watch([
-    		config.dest + '/*.*',
-        config.dest + '/**/*.*'
+    		config.dest + '*.*',
+        config.dest + '**/*.*'
     	]))
-    .pipe(connect.reload());
+      .pipe(connect.reload());
 });

@@ -6,6 +6,7 @@ var browserify = require('browserify');
 var watchify = require('watchify');
 var connect = require('gulp-connect');
 var config = require('../config').app;
+var handlers = require('../handlers');
 
 // TODO: Split this task up. 
 // 1. Compile to separate js classes
@@ -14,13 +15,16 @@ var config = require('../config').app;
 
 var browserifyConfig = {
     settings: {
-      transform: ['reactify', 'babelify']
+      transform: [
+        'reactify', 
+        'babelify'
+      ]
     },
-    src: config.src + '/index.jsx',
-    dest: config.dest + '/js',
+    src: config.src + 'index.jsx',
+    dest: config.dest + 'js',
     outputName: 'index.js',
     debug: gutil.env.type === 'dev'
-}
+};
 
 watchify.args.debug = browserifyConfig.debug;
 
@@ -30,13 +34,12 @@ browserifyConfig.settings.transform.forEach(function(t) {
   bundler.transform(t);
 });
 
-gulp.task('browserify', bundle);
+gulp.task('javascript', bundle);
 bundler.on('update', bundle);
 
 function bundle() {
   return bundler.bundle()
-  // log errors if they happen
-  .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+  .on('error', handlers.error('browserfy-error'))
   .pipe(source(browserifyConfig.outputName))
   .pipe(gulp.dest(browserifyConfig.dest))
   .pipe(connect.reload());

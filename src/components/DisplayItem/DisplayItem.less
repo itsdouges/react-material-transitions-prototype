@@ -1,6 +1,10 @@
 // DisplayItem.less
 
-@import '../../mixins/Zindex.less';
+@import '../../mixins/z-index.less';
+
+body {
+	background: black;
+}
 
 .mt-display-item {
 	z-index: @content-display-z;
@@ -9,7 +13,6 @@
 	margin: 0;
 	overflow: hidden;
 
-	// types of content displays, currently only single+double are implemented
 	&.single {
 		height: 20em;
 		width: 20em;

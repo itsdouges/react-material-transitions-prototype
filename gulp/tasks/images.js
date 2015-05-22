@@ -3,13 +3,13 @@ var config = require('../config').app;
 var rename = require('gulp-rename');
 
 var imagesConfig = {
-  src: config.src + '/**/*.{ttf,woff,eof,svg,png,jpg,jpeg}',
-  dest: config.dest + '/images/'
+  src: config.src + '**/*.{ttf,woff,eof,svg,png,jpg,jpeg}',
+  dest: config.dest + 'images/'
 };
 
 gulp.task('images', function() {
   
-  gulp
+  return gulp
   	// Gathers the source files based on the input pattern.
   	.src(imagesConfig.src)
 

@@ -8,6 +8,6 @@ var config = require('../config').app;
 
 gulp.task('clean:dist', function (cb) {
 	return gulp
-					.src(config.dist)
-					.pipe(clean());
+		.src(config.dest)
+		.pipe(clean());
 });
