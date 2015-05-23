@@ -7,15 +7,24 @@ let TransitionExpander = React.createClass({
 
 	componentDidMount() {
 		this.tweenState('scale', {
-			easing: TweenState.easingTypes.easeInOutQuad,
+			easing: TweenState.easingTypes.easeOutQuad,
 			duration: 500,
-			endValue: this.props.options.scale.end
+			endValue: this.props.options.scale.end,
+			onEnd: this.onEnd
+		});
+	},
+
+	onEnd() {
+		this.tweenState('opacity', {
+				duration: 500,
+				endValue: 0
 		});
 	},
 
 	getInitialState() {
 		return {
-			scale: this.props.options.scale.start
+			scale: this.props.options.scale.start,
+			opacity: 1
 		};
 	},
 
@@ -33,6 +42,7 @@ let TransitionExpander = React.createClass({
 			height: options.diameter,
 			top: options.offset.y,
 			left: options.offset.x,
+			opacity: this.getTweeningValue('opacity'),
 			transform: 'scale(' + this.getTweeningValue('scale') + ')'
 		};
 
