@@ -1,27 +1,27 @@
 @import (less) '../node_modules/normalize-css/normalize.css';
+@import 'mixins/colours.less';
 
-@primary-color: green;
-@container-max-width: 1050px;
+@container-max-width: 1500px;
 
-h1 {
-  color: @primary-color;
+* {
+	box-sizing: border-box;
 }
 
-li.task {
-  list-style-type: none;
+body, html {
+	min-height: 100%;
+}
 
-  label {
-    padding: 0 10px;
-  }
+body {
+	background: @background-color;
 }
 
 .container {
+	padding: 0.15em;
 	z-index: 200;
 	position: relative;
 	max-width: @container-max-width;
 	margin: 0 auto;
 	transition: transform 0.5s;
-	background: red;
 }
 
 // injector

@@ -1,25 +1,57 @@
 // DisplayItem.less
 
 @import '../../mixins/z-index.less';
+@import '../../mixins/colours.less';
 
-body {
-	background: black;
-}
+@single-width: 20%;
+@single-height: 25%;
 
 .mt-display-item {
 	z-index: @content-display-z;
-	display: inline-block;
+	display: block;
 	background-color: orange;
 	margin: 0;
 	overflow: hidden;
+	float: left;
+	position: relative;
+	height: 0;
+
+	border: 0.15em solid @background-color;
 
 	&.single {
-		height: 20em;
-		width: 20em;
+		width: @single-width;	
+		padding-bottom: @single-height;
 	}
 
-	&.double {
-		height: 20em;
-		width: 40em;
+	&.double-double {
+		width: @single-width * 2;
+		padding-bottom: calc((@single-height * 2) + 0.3em); // TODO: This doesn't display work very well. Look into it!
+
+		&.right {
+			float: right;
+		}
 	}
+}
+
+.mt-info {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: green;
+	height: 25%;
+	padding: 1em;
+	
+}
+
+.mt-title {
+	display: block;
+}
+
+.mt-subtitle {
+	display: block;
+}
+
+.mt-favourite {
+
 }

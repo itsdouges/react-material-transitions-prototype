@@ -47,9 +47,10 @@
     ]
   },
   "dependencies": {
-    "flux": "^2.0.3",
     "normalize-css": "^2.3.1",
     "object-assign": "^2.0.0",
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "react-tween-state": "0.0.5",
+    "reflux": "^0.2.7"
   }
 }
