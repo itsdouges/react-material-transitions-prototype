@@ -3,8 +3,16 @@
 @import '../../mixins/z-index.less';
 @import '../../mixins/colours.less';
 
-@single-width: 20%;
-@single-height: 25%;
+// Aspect ratio of 1:1.25.
+@single-width: 1%;
+@single-height: 1.25%;
+
+@big: 20;
+@medium: 25;
+@small: 33.33333;
+@full: 100;
+
+@padding: 0.15em;
 
 .mt-display-item {
 	z-index: @content-display-z;
@@ -15,20 +23,62 @@
 	float: left;
 	position: relative;
 	height: 0;
-	border: 0.15em solid @background-color;
+	border: @padding solid @background-color;
+}
 
-	&.single {
-		width: @single-width;	
-		padding-bottom: @single-height;
+.single {
+	width: @single-width * @full;
+	padding-bottom: @single-height * @full;
+}
+
+.double-double {
+	width: @single-width * @full;
+	padding-bottom: @single-height * @full;
+
+	&.right {
+		float: right;
+	}
+}
+
+@media screen and (min-width: @container-small-width) {
+	.single {
+		width: @single-width * @small;	
+		padding-bottom: @single-height * @small;
 	}
 
-	&.double-double {
-		width: @single-width * 2;
-		padding-bottom: calc((@single-height * 2) + 0.3em); // TODO: This doesn't display work very well. Look into it!
+	.double-double {
+		width: @single-width * @small * 2;
 
-		&.right {
-			float: right;
-		}
+		// TODO: This doesn't display work very well. Look into it!
+		padding-bottom: calc((@single-height * @small * 2) + @padding * 2.5);
+	}
+}
+
+@media screen and (min-width: @container-medium-width) {
+	.single {
+		width: @single-width * @medium;	
+		padding-bottom: @single-height * @medium;
+	}
+
+	.double-double {
+		width: @single-width * @medium * 2;
+
+		// TODO: This doesn't display work very well. Look into it!
+		padding-bottom: calc((@single-height * @medium * 2) + @padding * 2.5);
+	}
+}
+
+@media screen and (min-width: @container-big-width) {
+	.single {
+		width: @single-width * @big;	
+		padding-bottom: @single-height * @big;
+	}
+
+	.double-double {
+		width: @single-width * @big * 2;
+
+		// TODO: This doesn't display work very well. Look into it!
+		padding-bottom: calc((@single-height * @big * 2) + @padding * 2);
 	}
 }
 

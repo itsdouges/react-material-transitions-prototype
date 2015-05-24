@@ -1,0 +1,32 @@
+@container-big-width: 1500px;
+@container-medium-width: 1200px;
+@container-small-width: 900px;
+@container-full-width: 600px;
+
+.container {
+	padding: 0.15em;
+	z-index: 200;
+	position: relative;
+	margin: 0 auto;
+
+	max-width: @container-full-width;
+}
+
+@media screen and (min-width: @container-small-width) {
+	.container {
+		width: @container-small-width;
+		max-width: inherit;
+	}
+}
+
+@media screen and (min-width: @container-medium-width) {
+	.container {
+		width: @container-medium-width;
+	}
+}
+
+@media screen and (min-width: @container-big-width) {
+	.container {
+		width: @container-big-width;
+	}
+}

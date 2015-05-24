@@ -2,13 +2,15 @@ const React = require('react');
 const PyCalc = require('../../helpers/PythagorasCalculator.js');
 const TweenState = require('react-tween-state');
 
+const BASE_TRANSITION_SPEED = 500;
+
 let TransitionExpander = React.createClass({
 	mixins: [TweenState.Mixin],
 
 	componentDidMount() {
 		this.tweenState('scale', {
 			easing: TweenState.easingTypes.easeOutQuad,
-			duration: 500,
+			duration: BASE_TRANSITION_SPEED,
 			endValue: this.props.options.scale.end,
 			onEnd: this.onEnd
 		});
@@ -16,7 +18,7 @@ let TransitionExpander = React.createClass({
 
 	onEnd() {
 		this.tweenState('opacity', {
-				duration: 500,
+				duration: BASE_TRANSITION_SPEED * 2,
 				endValue: 0
 		});
 	},
