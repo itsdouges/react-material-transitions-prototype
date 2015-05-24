@@ -16,11 +16,16 @@ let DisplayItem = React.createClass({
 			className += ' right';
 		}
 
+		let style = {
+			backgroundImage: options.display
+		};
+
 		return (
 			<div 
-				className={ className }
-				backgroundImage={ options.display }
-				onClick={ this.props.onClick }>
+				className={ className }>
+				<div className="mt-img"
+					style={style}
+					onClick={ this.props.onClick } />
 				<div className="mt-info">
 					<span className="mt-title">{ this.props.title }</span>
 					<span className="mt-subtitle">{ this.props.subtitle }</span>
