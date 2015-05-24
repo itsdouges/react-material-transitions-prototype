@@ -10,6 +10,7 @@ let MaterialTransition = React.createClass({
 		return {
 			expander: {
 				expanded: false,
+				animating: false,
 				offset: {
 					x: 0,
 					y: 0
@@ -45,7 +46,7 @@ let MaterialTransition = React.createClass({
 
 		this.setState({
 			expander: {
-				expanded: true,
+				animating: true,
 				diameter: diameter.small,
 				offset: {
 					x: elementClientRect.left,
@@ -59,25 +60,50 @@ let MaterialTransition = React.createClass({
 		});
 	},
 
+	finishedExpanding() {
+		let state = this.state;
+		state.expander.expanded = true
+
+		this.setState(state);
+	},
+
+	finishedAnimating() {
+		let state = this.state;
+		state.expander.animating = false;
+
+		this.setState(state);
+	},
+
 	render() {
-		let items = this.props.items;
-		let expander = this.state.expander.expanded ? 
-		<TransitionExpander options={this.state.expander} /> : '';
+		let items;
+		let expander;
+		let content;
+
+		if (!this.state.expander.expanded) {
+			items = this.props.items.map((item, i) =>
+				<DisplayItem 
+					onClick={this.onItemClick}
+					key={i} 
+					title={item.title}
+					subtitle={item.subtitle}
+					images={item.images}
+					options={item.options} />
+			);
+		} else {
+			content = <div></div>; 
+		}
+
+		if (this.state.expander.animating) {
+			expander = <TransitionExpander 
+									options={this.state.expander}
+									onExpanded={this.finishedExpanding}
+									onFinishedAnimating={this.finishedAnimating} />;
+		}
 
 		return (
       <div className="container">
-        {items.map((item, i) =>
-          <DisplayItem 
-          	onClick={this.onItemClick}
-        		key={i} 
-						title={item.title}
-						subtitle={item.subtitle}
-						images={item.images}
-						options={item.options} />
-        )}
-        
+        {items}
         <div style={{clear:'both'}} />
-
         {expander}
       </div>
 		);

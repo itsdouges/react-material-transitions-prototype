@@ -17,10 +17,17 @@ let TransitionExpander = React.createClass({
 	},
 
 	onEnd() {
+		this.props.onExpanded();
+
 		this.tweenState('opacity', {
 				duration: BASE_TRANSITION_SPEED * 2,
-				endValue: 0
+				endValue: 0,
+				onEnd: this.finishedAnimating
 		});
+	},
+
+	finishedAnimating() {
+		this.props.onFinishedAnimating();
 	},
 
 	getInitialState() {
