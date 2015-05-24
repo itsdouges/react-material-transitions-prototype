@@ -19,9 +19,6 @@ let MaterialTransition = React.createClass({
 	onItemClick(e) {
 		let test = window.getComputedStyle(React.findDOMNode(this));
 
-		console.log(test.marginLeft);
-		console.log(test.marginRight);
-
 		let domElement = e.target;
 		let elementClientRect = domElement.getBoundingClientRect();
 
@@ -40,9 +37,11 @@ let MaterialTransition = React.createClass({
 		let extra = PyCalc.calc(x, y) * 2;
 		let scaleEnd = Math.ceil((Window.calcWindowDiagonal() + extra) / diameter.small);
 
+		// TODO: Clean this logic up.
 		var mLeft = test.marginLeft.slice(0, -2);
+		var mW = test.width.slice(0, -2) * 0.1;
 
-		console.log(mLeft);
+		console.log(window);
 
 		this.setState({
 			expander: {
@@ -63,8 +62,9 @@ let MaterialTransition = React.createClass({
 					height: domElement.offsetHeight
 				},
 				initialLocation: {
-					x: elementClientRect.left - mLeft,
-					y: elementClientRect.top - 303
+					x: elementClientRect.left - mLeft - mW,
+					// TODO: Calculate space height on the fly.
+					y: elementClientRect.top - 303 + window.scrollY
 				}
 			}
 		});
