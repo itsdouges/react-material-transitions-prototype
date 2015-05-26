@@ -1,30 +1,69 @@
 const React = require('react');
+const TweenState = require('react-tween-state');
 
 let Content = React.createClass({
+	mixins: [TweenState.Mixin],
+
+	componentDidMount() {
+		this.tweenState('x', {
+			easing: TweenState.easingTypes.easeInOutQuad,
+			duration: 1000,
+			endValue: 0,
+			delay: 100
+		});
+
+		this.tweenState('y', {
+			easing: TweenState.easingTypes.easeInOutQuad,
+			duration: 1000,
+			endValue: 0,
+			delay: 100
+		});
+
+		this.tweenState('clipRight', {
+			easing: TweenState.easingTypes.easeInOutQuad,
+			duration: 500,
+			endValue: 1500,
+			delay: 500
+		});
+
+		this.tweenState('clipBottom', {
+			easing: TweenState.easingTypes.easeInOutQuad,
+			duration: 500,
+			endValue: 1500,
+			delay: 500
+		});
+
+		this.tweenState('width', {
+			easing: TweenState.easingTypes.easeInOutQuad,
+			duration: 500,
+			endValue: 1500,
+			delay: 500
+		});
+	},
+
 	getInitialState() {
 		return {
-			content: {
-				clip: {
-					right: this.props.options.initialSize.width,
-					bottom: this.props.options.initialSize.height
-				},
-				offset: this.props.options.initialLocation
-			},
-			image: this.props.options.initialSize
+			x: this.props.options.initialLocation.x,
+			y: this.props.options.initialLocation.y,
+			animating: this.props.options.animating,
+			clipRight: this.props.options.initialSize.width,
+			clipBottom: this.props.options.initialSize.height,
+			width: this.props.options.initialSize.width,
+			height: this.props.options.initialSize.height
 		};
 	},
 
 	render() {
 		let containerStyle = {
-			clip: 'rect(0 ' + this.state.content.clip.right + 'px ' + 
-				this.state.content.clip.bottom + 'px 0)',
-			transform: 'translate3d(' + this.state.content.offset.x + 'px, ' + 
-				this.state.content.offset.y + 'px, 0)'
+			clip: 'rect(0 ' + this.getTweeningValue('clipRight') + 'px ' + 
+				this.getTweeningValue('clipBottom') + 'px 0)',
+			transform: 'translate3d(' + this.getTweeningValue('x') + 'px, ' + 
+				this.getTweeningValue('y') + 'px, 0)'
 		};
 
 		let imageStyle = {
-			width: this.state.image.width,
-			height: this.state.image.height
+			width: this.getTweeningValue('width'),
+			height: this.getTweeningValue('height')
 		};
 
 		return (

@@ -57,11 +57,13 @@ let MaterialTransition = React.createClass({
 				}
 			},
 			content: {
+				animating: true,
 				initialSize: {
 					width: domElement.offsetWidth,
 					height: domElement.offsetHeight
 				},
 				initialLocation: {
+					// TODO: Fixed -> relative instead of current so we can do smoother transition.
 					x: elementClientRect.left - mLeft - mW,
 					// TODO: Calculate space height on the fly.
 					y: elementClientRect.top - 303 + window.scrollY
@@ -74,12 +76,21 @@ let MaterialTransition = React.createClass({
 		let state = this.state;
 		state.expander.expanded = true
 
+		console.log(state.content.initialLocation);
+
+		state.content.initialLocation.y -= window.scrollY;
+
+		console.log(state.content.initialLocation);
+
+		console.log('expanding: finished');
+
 		this.setState(state);
 	},
 
 	finishedAnimating() {
 		let state = this.state;
 		state.expander.animating = false;
+		state.content.animating = false;
 
 		this.setState(state);
 	},
@@ -105,7 +116,7 @@ let MaterialTransition = React.createClass({
 		if (this.state.expander.animating || this.state.expander.expanded) {
 			content = <Content 
 									options={this.state.content} />;
-
+			console.log('render content');
 			spacer = <div className="mt-content-spacer"></div>;
 		}
 
