@@ -1,5 +1,5 @@
 
-# material-react-prototype
+# react-material-transitions
 
 This was a prototype to see how one could implement material styled transitions. Clone it locally and try it out for yourself!
 
